@@ -43,8 +43,8 @@ const Banner = () => {
               </p>
             </div>
             <div className="mt-6">
-              <Button>See Recipies</Button>
-              <Button>Add Recipes</Button>
+              <Button url={"/recipes"}>See Recipies</Button>
+              <Button url={"/add-recipes"}>Add Recipes</Button>
             </div>
           </div>
         </SwiperSlide>
@@ -66,8 +66,8 @@ const Banner = () => {
               </p>
             </div>
             <div className="mt-6">
-              <Button>See Recipies</Button>
-              <Button>Add Recipes</Button>
+              <Button url={"/recipes"}>See Recipies</Button>
+              <Button url={"/add-recipes"}>Add Recipes</Button>
             </div>
           </div>
         </SwiperSlide>
@@ -88,8 +88,8 @@ const Banner = () => {
               </p>
             </div>
             <div className="mt-6">
-              <Button>See Recipies</Button>
-              <Button>Add Recipes</Button>
+              <Button url={"/recipes"}>See Recipies</Button>
+              <Button url={"/add-recipes"}>Add Recipes</Button>
             </div>
           </div>
         </SwiperSlide>

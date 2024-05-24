@@ -5,6 +5,7 @@ import AddRecipes from "../pages/AddRecipes";
 import BuyCoin from "../pages/BuyCoin";
 import Home from "../pages/Home";
 import Recipes from "../pages/Recipes";
+import NotFound from "../pages/NotFound";
 
 export const router = createBrowserRouter([
   {
@@ -26,6 +27,10 @@ export const router = createBrowserRouter([
       {
         path: "/buy-coin",
         element: <BuyCoin />,
+      },
+      {
+        path: "*",
+        element: <NotFound />,
       },
     ],
   },

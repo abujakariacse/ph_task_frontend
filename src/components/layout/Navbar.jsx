@@ -36,7 +36,7 @@ const Navbar = () => {
       <nav className="bg-red-500 border-gray-200 dark:bg-gray-900">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
           <Link
-            to={""}
+            to={"/"}
             className="flex items-center space-x-3 rtl:space-x-reverse "
           >
             <img
@@ -53,7 +53,7 @@ const Navbar = () => {
             <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0  dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700 ">
               <li>
                 <Link
-                  to={""}
+                  to={"/"}
                   className="block py-2 px-3 text-white  rounded md:bg-transparent md:p-0"
                 >
                   Home
@@ -61,7 +61,7 @@ const Navbar = () => {
               </li>
               <li>
                 <Link
-                  to={""}
+                  to={"/recipes"}
                   className="block py-2 px-3 text-white  rounded md:bg-transparent md:p-0"
                 >
                   Recipes
@@ -69,7 +69,7 @@ const Navbar = () => {
               </li>
               <li>
                 <Link
-                  to={""}
+                  to={"add-recipes"}
                   className="block py-2 px-3 text-white  rounded md:bg-transparent md:p-0"
                 >
                   Add Recipes
@@ -77,7 +77,7 @@ const Navbar = () => {
               </li>
               <li>
                 <Link
-                  to={""}
+                  to={"#"}
                   className="block py-2 px-3 text-white  rounded md:bg-transparent md:p-0"
                 >
                   Google Login
