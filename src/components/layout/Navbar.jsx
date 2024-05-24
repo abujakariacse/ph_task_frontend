@@ -94,16 +94,15 @@ const Navabar = () => {
                 />
                 {isMenuVisible && (
                   <div
-                    className="absolute -right-2 w-28 mt-1 origin-top-left bg-white divide-y divide-gray-100 rounded-md shadow-lg opacity-100 visible transition duration-300 "
+                    className="absolute -right-2 w-32 mt-1 origin-top-left bg-white divide-y divide-gray-100 rounded-md shadow-lg opacity-100 visible transition duration-300 z-50"
                     ref={menuRef}
                   >
-                    {/* opacity-0  invisible*/}
                     <ul className="py-1 ">
-                      <li className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer flex gap-1 items-center ">
+                      <li className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 cursor-pointer flex gap-2 items-center ">
                         <RiCoinsLine className="text-yellow-400 text-xl" />
                         Coins
                       </li>
-                      <li className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 flex items-center gap-1 cursor-pointer">
+                      <li className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 flex items-center gap-2 cursor-pointer">
                         <RiLogoutCircleRLine className="text-red-400 text-xl" />
                         Log Out
                       </li>
