@@ -1,9 +1,10 @@
 import "./App.css";
+import Navabar from "./components/Navabar";
 
 function App() {
   return (
     <>
-      <h1>Hello World</h1>
+      <Navabar />
     </>
   );
 }
