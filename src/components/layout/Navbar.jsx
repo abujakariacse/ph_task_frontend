@@ -3,7 +3,7 @@ import { RiLogoutCircleRLine } from "react-icons/ri";
 import { RiCoinsLine } from "react-icons/ri";
 import { useEffect, useRef, useState } from "react";
 
-const Navabar = () => {
+const Navbar = () => {
   const [isMenuVisible, setIsMenuVisible] = useState(false);
   const menuRef = useRef(null);
   const imageRef = useRef(null);
@@ -45,7 +45,7 @@ const Navabar = () => {
               alt="Logo"
             />
             <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white text-white">
-              Ranna_Banna
+              Ranna Banna
             </span>
           </Link>
 
@@ -118,4 +118,4 @@ const Navabar = () => {
   );
 };
 
-export default Navabar;
+export default Navbar;

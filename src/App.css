@@ -1,6 +1,5 @@
-/* Add this CSS in your styles file (e.g., App.css) */
 .hero-slider {
-  height: 440px;
+  height: 460px;
 }
 
 .mySwiper {
@@ -48,11 +47,9 @@
   background-image: url("https://i.ibb.co/c17mLqC/pattern-home.jpg");
 }
 
-.container {
-  @apply mx-auto;
-  max-width: 920px;
+.footer-section {
+  background-image: url("https://i.ibb.co/Q62BXFM/footer.jpg");
 }
-
 .test {
   border: 1px solid red;
 }

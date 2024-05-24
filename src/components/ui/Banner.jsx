@@ -8,7 +8,7 @@ import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import Button from "./Button";
 const Banner = () => {
   return (
-    <div className="hero-slider rounded">
+    <div className="hero-slider rounded my-[1px]">
       <Swiper
         spaceBetween={30}
         centeredSlides={true}

@@ -1,14 +1,11 @@
 import "./App.css";
-import Banner from "./components/ui/Banner";
-import Navbar from "./components/layout/Navbar";
-import Testimonial from "./components/ui/Testimonial";
+
+import MainLayout from "./components/layout/MainLayout";
 
 function App() {
   return (
     <>
-      <Navbar />
-      <Banner />
-      <Testimonial />
+      <MainLayout />
     </>
   );
 }
