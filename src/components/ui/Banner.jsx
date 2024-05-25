@@ -5,10 +5,11 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
-import Button from "./Button";
+
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../../firebase";
 import { signInWithGoogle } from "../../utils/firebaseLogin";
+import Button from "./Button";
 const Banner = () => {
   const [user] = useAuthState(auth);
 

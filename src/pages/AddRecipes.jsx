@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Breadcrumb from "../components/ui/Breadcrumb";
+import { toast } from "react-toastify";
 
 const AddRecipes = () => {
   const [formData, setFormData] = useState({
@@ -10,6 +11,8 @@ const AddRecipes = () => {
     recipeDetails: "",
     image: null,
   });
+
+  const [uploading, setUploading] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -27,9 +30,54 @@ const AddRecipes = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // console.log(formData);
+
+    if (!formData.image) {
+      toast.warn("Please select an image.");
+      return;
+    }
+
+    setUploading(true);
+
+    const formDataImage = new FormData();
+    formDataImage.append("image", formData.image);
+
+    try {
+      const response = await fetch(
+        `https://api.imgbb.com/1/upload?key=${
+          import.meta.env.VITE_IMGBB_API_KEY
+        }`,
+        {
+          method: "POST",
+          body: formDataImage,
+        }
+      );
+
+      if (!response.ok) {
+        return toast.error("Network error");
+      }
+
+      const data = await response.json();
+      const completeFormData = {
+        ...formData,
+        image: data.data.url,
+      };
+
+      console.log("Form submitted", completeFormData);
+    } catch (error) {
+      toast.error("Failed to upload image");
+    } finally {
+      setUploading(false);
+      setFormData({
+        recipeName: "",
+        country: "",
+        videoCode: "",
+        category: "",
+        recipeDetails: "",
+        image: null,
+      });
+    }
   };
 
   return (
@@ -168,10 +216,26 @@ const AddRecipes = () => {
             </div>
             <div className=" border-gray-200 rounded-b mt-5">
               <button
-                className="text-white bg-red-400 font-medium rounded-sm text-base px-8 py-2.5 text-center"
+                className={`text-white ${
+                  uploading ? "bg-gray-400" : "bg-red-400"
+                } font-medium rounded-sm text-base px-8 py-2.5 text-center flex items-center`}
                 type="submit"
               >
-                Save Recipe
+                {uploading && (
+                  <span>
+                    <svg
+                      width="20"
+                      height="20"
+                      fill="currentColor"
+                      className="mr-2 animate-spin"
+                      viewBox="0 0 1792 1792"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path d="M526 1394q0 53-37.5 90.5t-90.5 37.5q-52 0-90-38t-38-90q0-53 37.5-90.5t90.5-37.5 90.5 37.5 37.5 90.5zm498 206q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm-704-704q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm1202 498q0 52-38 90t-90 38q-53 0-90.5-37.5t-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm-964-996q0 66-47 113t-113 47-113-47-47-113 47-113 113-47 113 47 47 113zm1170 498q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm-640-704q0 80-56 136t-136 56-136-56-56-136 56-136 136-56 136 56 56 136zm530 206q0 93-66 158.5t-158 65.5q-93 0-158.5-65.5t-65.5-158.5q0-92 65.5-158t158.5-66q92 0 158 66t66 158z"></path>
+                    </svg>
+                  </span>
+                )}
+                {uploading ? "Uploading" : "Save Recipe"}
               </button>
             </div>
           </form>

@@ -12,3 +12,5 @@ const Button = ({ children, url }) => {
     </button>
   );
 };
+
+export default Button;
