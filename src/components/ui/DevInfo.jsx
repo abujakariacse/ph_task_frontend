@@ -47,7 +47,7 @@ const DevInfo = () => {
                 </h3>
                 <p className="flex  gap-4 text-base italic">
                   Dhaka Polytechnic Institute{" "}
-                  <li className="list-disc">Jan 2024</li>
+                  <li className="list-disc">2019 - 2024</li>
                 </p>
               </div>
             </div>

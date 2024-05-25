@@ -1,6 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
-
 import AddRecipes from "../pages/AddRecipes";
 import BuyCoin from "../pages/BuyCoin";
 import Home from "../pages/Home";
@@ -35,7 +34,5 @@ export const router = createBrowserRouter([
     ],
   },
 ]);
-
-console.log("Routing hitted");
 
 export default router;

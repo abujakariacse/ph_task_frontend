@@ -6,7 +6,12 @@ import "swiper/css/navigation";
 
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import Button from "./Button";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "../../firebase";
+import { signInWithGoogle } from "../../utils/firebaseLogin";
 const Banner = () => {
+  const [user] = useAuthState(auth);
+
   return (
     <div className="hero-slider rounded my-[1px]">
       <Swiper
@@ -44,7 +49,16 @@ const Banner = () => {
             </div>
             <div className="mt-6">
               <Button url={"/recipes"}>See Recipies</Button>
-              <Button url={"/add-recipes"}>Add Recipes</Button>
+              {user ? (
+                <Button url={"/add-recipes"}>Add Recipes</Button>
+              ) : (
+                <button
+                  onClick={signInWithGoogle}
+                  className="bg-red-400 px-3 py-2 rounded font-medium mr-3 hover:bg-green-500 transition-all duration-300 ease-linear"
+                >
+                  Add Recipes
+                </button>
+              )}
             </div>
           </div>
         </SwiperSlide>
@@ -67,7 +81,16 @@ const Banner = () => {
             </div>
             <div className="mt-6">
               <Button url={"/recipes"}>See Recipies</Button>
-              <Button url={"/add-recipes"}>Add Recipes</Button>
+              {user ? (
+                <Button url={"/add-recipes"}>Add Recipes</Button>
+              ) : (
+                <button
+                  onClick={signInWithGoogle}
+                  className="bg-red-400 px-3 py-2 rounded font-medium mr-3 hover:bg-green-500 transition-all duration-300 ease-linear"
+                >
+                  Add Recipes
+                </button>
+              )}
             </div>
           </div>
         </SwiperSlide>
@@ -89,7 +112,16 @@ const Banner = () => {
             </div>
             <div className="mt-6">
               <Button url={"/recipes"}>See Recipies</Button>
-              <Button url={"/add-recipes"}>Add Recipes</Button>
+              {user ? (
+                <Button url={"/add-recipes"}>Add Recipes</Button>
+              ) : (
+                <button
+                  onClick={signInWithGoogle}
+                  className="bg-red-400 px-3 py-2 rounded font-medium mr-3 hover:bg-green-500 transition-all duration-300 ease-linear"
+                >
+                  Add Recipes
+                </button>
+              )}
             </div>
           </div>
         </SwiperSlide>

@@ -33,10 +33,7 @@
 
 .swiper-button-next,
 .swiper-button-prev {
-  color: white !important;
-  width: 8px !important;
-  height: 8px !important;
-  padding: 0 10px;
+  display: none !important;
 }
 
 .swiper-pagination-bullet {
@@ -50,6 +47,11 @@
 .footer-section {
   background-image: url("https://i.ibb.co/Q62BXFM/footer.jpg");
 }
+
+option:hover {
+  background-color: yellow;
+}
+
 .test {
   border: 1px solid red;
 }
