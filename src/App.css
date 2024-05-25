@@ -44,14 +44,25 @@
   background-image: url("https://i.ibb.co/c17mLqC/pattern-home.jpg");
 }
 
-.footer-section {
-  background-image: url("https://i.ibb.co/Q62BXFM/footer.jpg");
-}
-
 option:hover {
   background-color: yellow;
 }
 
 .test {
   border: 1px solid red;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="checkbox"] {
+  accent-color: rgba(255, 31, 31, 0.804);
+}
+
+.container {
+  max-width: 1240px;
+  margin: 0 auto;
 }

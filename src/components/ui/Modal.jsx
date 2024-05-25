@@ -1,7 +1,10 @@
-import PropTypes from "prop-types";
 import { TiWarningOutline } from "react-icons/ti";
 
-const Modal = ({ setShow }) => {
+const Modal = ({ setShowModal, setIsConfirmed }) => {
+  const handleModalInteraction = (interact) => {
+    setIsConfirmed(interact);
+    setShowModal((prev) => !prev);
+  };
   return (
     <div>
       <div className="fixed z-10 inset-0 overflow-y-auto">
@@ -17,12 +20,12 @@ const Modal = ({ setShow }) => {
               </div>
               <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                 <h3 className="text-lg leading-6 font-medium text-gray-900">
-                  Modal Title
+                  Confirm Purchase?
                 </h3>
                 <div className="mt-2">
                   <p className="text-sm leading-5 text-gray-500">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Autem mollitia inventore quod. Yay!
+                    You are about to spend 10 coins to purchase this recipe. Do
+                    you wish to continue?
                   </p>
                 </div>
               </div>
@@ -30,7 +33,7 @@ const Modal = ({ setShow }) => {
             <div className="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
               <span className="flex w-full rounded-md shadow-sm sm:ml-3 sm:w-auto">
                 <button
-                  onClick={() => setShow((prev) => !prev)}
+                  onClick={() => handleModalInteraction(true)}
                   type="button"
                   className="inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-green-600 text-base leading-6 font-medium text-white shadow-sm hover:bg-green-500 focus:outline-none focus:shadow-outline-green transition ease-in-out duration-150 sm:text-sm sm:leading-5"
                 >
@@ -39,7 +42,7 @@ const Modal = ({ setShow }) => {
               </span>
               <span className="mt-3 flex w-full rounded-md shadow-sm sm:mt-0 sm:w-auto">
                 <button
-                  onClick={() => setShow((prev) => !prev)}
+                  onClick={() => handleModalInteraction(false)}
                   type="button"
                   className="inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-white text-base leading-6 font-medium text-gray-700 shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue transition ease-in-out duration-150 sm:text-sm sm:leading-5"
                 >
@@ -52,10 +55,6 @@ const Modal = ({ setShow }) => {
       </div>
     </div>
   );
-};
-
-Modal.propTypes = {
-  setShow: PropTypes.func.isRequired,
 };
 
 export default Modal;

@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { RiLogoutCircleRLine } from "react-icons/ri";
 import { RiCoinsLine } from "react-icons/ri";
 import { useEffect, useRef, useState } from "react";
@@ -14,7 +14,7 @@ const Navbar = () => {
 
   const [user] = useAuthState(auth);
 
-  // console.log(user);
+  const navigate = useNavigate();
 
   const toggleMenu = () => {
     setIsMenuVisible(!isMenuVisible);
@@ -29,6 +29,11 @@ const Navbar = () => {
     ) {
       setIsMenuVisible(false);
     }
+  };
+
+  const handlePurchaseCoin = () => {
+    navigate("/purchase-coin");
+    setIsMenuVisible(false);
   };
 
   const handleSignOut = () => {
@@ -53,17 +58,17 @@ const Navbar = () => {
             className="flex items-center space-x-3 rtl:space-x-reverse "
           >
             <img
-              src="https://i.ibb.co/LSStRnC/logo.png"
+              src="https://i.imgur.com/8aOTOK0.png"
               className="h-12"
               alt="Logo"
             />
-            <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white text-white">
+            <span className="self-center text-lg font-semibold whitespace-nowrap dark:text-white text-white">
               Ranna Banna
             </span>
           </Link>
 
           <div className="hidden w-full md:block md:w-auto" id="navbar-default">
-            <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0  dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700 ">
+            <ul className="font-medium text-sm flex flex-col p-4 md:p-0 mt-4 rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0  dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700 ">
               <li>
                 <Link
                   to={"/"}
@@ -106,7 +111,7 @@ const Navbar = () => {
                 <div className="relative">
                   <img
                     ref={imageRef}
-                    className="inline-block size-8 rounded-full ring-2 ring-white cursor-pointer"
+                    className="inline-block size-6 rounded-full ring-2 ring-white cursor-pointer"
                     src={user?.photoURL}
                     alt="profile_pic"
                     onClick={toggleMenu}
@@ -117,7 +122,10 @@ const Navbar = () => {
                       ref={menuRef}
                     >
                       <ul className="py-1 ">
-                        <li className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 cursor-pointer flex gap-2 items-center ">
+                        <li
+                          onClick={handlePurchaseCoin}
+                          className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 cursor-pointer flex gap-2 items-center "
+                        >
                           <RiCoinsLine className="text-yellow-400 text-xl" />
                           Coins
                         </li>

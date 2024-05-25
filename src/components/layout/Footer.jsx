@@ -15,10 +15,10 @@ const Footer = () => {
               className="h-16"
               alt="Logo"
             />
-            <h3 className="font-bold text-xl text-grey-700">Ranna Banna</h3>
+            <h3 className="font-bold text-base text-grey-700">Ranna Banna</h3>
           </div>
           <div className="p-5">
-            <div className="text-sm uppercase text-grey-700 font-bold">
+            <div className="text-xs uppercase text-grey-700 font-bold">
               Resources
             </div>
             <a className="my-3 block" href="/#">
@@ -32,7 +32,7 @@ const Footer = () => {
             </a>
           </div>
           <div className="p-5">
-            <div className="text-sm uppercase text-grey-700 font-bold">
+            <div className="text-xs uppercase text-grey-700 font-bold">
               Support
             </div>
             <a className="my-3 block" href="/#">
@@ -46,7 +46,7 @@ const Footer = () => {
             </a>
           </div>
           <div className="p-5">
-            <div className="text-sm uppercase text-grey-700 font-bold">
+            <div className="text-xs uppercase text-grey-700 font-bold">
               Contact us
             </div>
             <a className="my-3 block" href="#">
@@ -63,7 +63,7 @@ const Footer = () => {
 
       <div className=" pt-2">
         <div
-          className="flex pb-5 px-3 m-auto pt-5 border-t text-gray-800 text-sm flex-col
+          className="flex pb-5 px-3 m-auto pt-5 border-t text-gray-800 text-xs flex-col
       max-w-screen-lg items-center"
         >
           <div className="md:flex-auto md:flex-row-reverse mt-2 flex-row flex">

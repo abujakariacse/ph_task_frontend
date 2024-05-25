@@ -13,7 +13,7 @@ const Banner = () => {
   const [user] = useAuthState(auth);
 
   return (
-    <div className="hero-slider rounded my-[1px]">
+    <div className="hero-slider rounded my-[0.5px]">
       <Swiper
         spaceBetween={30}
         centeredSlides={true}
@@ -37,11 +37,11 @@ const Banner = () => {
           />
           <div className=" absolute text-white text-center">
             <div className="flex flex-col gap-6">
-              <h1 className="text-5xl font-semibold break-text">
+              <h1 className="text-4xl font-semibold break-text">
                 Choose from thousands of recipes
               </h1>
 
-              <p className="text-base font-normal ">
+              <p className="text-sm font-medium ">
                 Appropriately integrate technically sound value with scalable{" "}
                 <br />
                 infomediaries negotiate sustainable strategic theme areas.
@@ -69,11 +69,11 @@ const Banner = () => {
           />
           <div className=" absolute text-white text-center">
             <div className="flex flex-col gap-6">
-              <h1 className="text-5xl font-semibold break-text">
+              <h1 className="text-4xl font-semibold break-text">
                 Discover endless culinary delights
               </h1>
 
-              <p className="text-base font-normal ">
+              <p className="text-sm font-medium ">
                 Seamlessly blend innovative culinary techniques with
                 <br />
                 timeless recipes to elevate your dining experience.
@@ -101,11 +101,11 @@ const Banner = () => {
           />
           <div className=" absolute text-white text-center">
             <div className="flex flex-col gap-6">
-              <h1 className="text-5xl font-semibold break-text">
+              <h1 className="text-4xl font-semibold break-text">
                 Embrace the flavors of the world
               </h1>
 
-              <p className="text-base font-normal ">
+              <p className="text-sm font-medium ">
                 Explore a symphony of tastes from diverse cultures <br /> and
                 culinary traditions, all in one delicious journey.
               </p>

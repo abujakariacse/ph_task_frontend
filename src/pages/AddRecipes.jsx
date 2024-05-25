@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Breadcrumb from "../components/ui/Breadcrumb";
 
 const AddRecipes = () => {
   const [formData, setFormData] = useState({
@@ -28,11 +29,12 @@ const AddRecipes = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
+    // console.log(formData);
   };
 
   return (
-    <div>
+    <div className="m-10">
+      <Breadcrumb routeName={"Add Recipe"} />
       <div className="bg-white border rounded-lg shadow relative m-10">
         <div className="flex items-start justify-between p-5 border-b rounded-t">
           <h3 className="text-xl font-semibold">Add Recipe</h3>
