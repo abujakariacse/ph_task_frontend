@@ -2,21 +2,39 @@ import { useState } from "react";
 import { plans } from "../utils/coinplans";
 import { GiTwoCoins } from "react-icons/gi";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import Breadcrumb from "../components/ui/Breadcrumb";
+import axios from "axios";
 
 const PurchaseCoin = () => {
   const [selectedPlan, setSelectedPlan] = useState("");
-  const navigate = useNavigate();
 
-  const handlePurchasePlan = () => {
+  const handlePurchasePlan = async () => {
     if (!selectedPlan) {
       return toast.warn("Select any plan first");
     }
-    navigate(`/payment?plan=${selectedPlan}`);
+
+    const product = {
+      name: "Recipe Viewer Coin",
+      price: 10,
+      quantity: 1,
+    };
+    let response = await axios.post(
+      "http://localhost:5000/api/v1/payment/create-checkout-session",
+      product
+    );
+
+    if (response && response.status === 200) {
+      console.log(response);
+
+      window.location.href = response.data.url;
+
+      console.log(response.data);
+    }
   };
   return (
-    <div className=" testimonial-section">
-      <div className="text-center pt-12 ">
+    <div className=" testimonial-section p-10">
+      <Breadcrumb routeName={"Purchase"} />
+      <div className="text-center">
         <h3 className="text-slate-700 font-semibold text-lg ">
           Current Balance
         </h3>
