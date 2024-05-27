@@ -50,32 +50,32 @@ const Navbar = () => {
     };
   }, []);
 
-  // useEffect(() => {
-  //   async function createUser() {
-  //     const headers = {
-  //       "Content-Type": "application/json",
-  //     };
+  useEffect(() => {
+    async function createUser() {
+      const headers = {
+        "Content-Type": "application/json",
+      };
 
-  //     const body = {
-  //       displayName: user?.displayName,
-  //       photoURL: user?.photoURL,
-  //       email: user?.email,
-  //     };
+      const body = {
+        displayName: user?.displayName,
+        photoURL: user?.photoURL,
+        email: user?.email,
+      };
 
-  //     const response = await fetch(
-  //       `${import.meta.env.VITE_API_URL}/users/create-user`,
-  //       {
-  //         method: "POST",
-  //         headers: headers,
-  //         body: JSON.stringify(body),
-  //       }
-  //     );
-  //     const data = await response.json();
-  //     console.log(data);
-  //   }
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/users/create-user`,
+        {
+          method: "POST",
+          headers: headers,
+          body: JSON.stringify(body),
+        }
+      );
+      const data = await response.json();
+      console.log(data);
+    }
 
-  //   createUser();
-  // }, [user]);
+    createUser();
+  }, [user?.email]);
 
   return (
     <div>

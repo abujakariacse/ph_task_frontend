@@ -6,7 +6,6 @@ import Breadcrumb from "../components/ui/Breadcrumb";
 import { useAuthState } from "react-firebase-hooks/auth";
 import axios from "axios";
 import { auth } from "../firebase";
-import { useNavigate } from "react-router-dom";
 
 const PurchaseCoin = () => {
   const [coin, setCoin] = useState(0);
@@ -16,8 +15,6 @@ const PurchaseCoin = () => {
     quantity: 0,
     customerEmail: "",
   });
-
-  const navigate = useNavigate();
 
   const [user] = useAuthState(auth);
 
@@ -45,8 +42,6 @@ const PurchaseCoin = () => {
       console.log(response);
 
       window.location.href = response.data.url;
-
-      console.log(response.data);
     }
   };
 
@@ -133,7 +128,7 @@ const PurchaseCoin = () => {
                       <div className="flex items-end justify-between">
                         <p>
                           <span className="text-base font-semibold">
-                            {plan?.coins} Coin
+                            {plan?.quantity} Coin
                           </span>
                         </p>
                         <p className="text-sm font-bold">${plan?.price}</p>

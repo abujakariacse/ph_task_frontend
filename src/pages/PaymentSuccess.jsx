@@ -1,6 +1,29 @@
-import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { Link, useSearchParams } from "react-router-dom";
 
 const PaymentSuccess = () => {
+  const [searchParams] = useSearchParams();
+
+  const email = searchParams.get("user");
+  const quantityString = searchParams.get("quantity");
+  const quantity = parseInt(quantityString);
+  const data = {
+    email,
+    coin: quantity,
+  };
+
+  useEffect(() => {
+    const apiUrl = `${import.meta.env.VITE_API_URL}/users/recharge-coin`;
+    fetch(apiUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data));
+  }, []);
   return (
     <div className="flex flex-col items-center justify-center py-12 testimonial-section">
       <img
