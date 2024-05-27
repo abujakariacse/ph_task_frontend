@@ -22,7 +22,7 @@ const AddRecipes = () => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
-      [name]: value,
+      [name]: value?.toLowerCase(),
     }));
   };
 
@@ -69,7 +69,7 @@ const AddRecipes = () => {
       };
 
       const uploadAbleData = { ...completeFormData, creatorEmail: user?.email };
-      console.log(uploadAbleData);
+
       if (response.status === 200) {
         const headers = {
           "Content-Type": "application/json",

@@ -24,6 +24,8 @@ const Recipes = () => {
     setSearchInput(event.target.value);
   };
 
+  console.log(searchInput);
+
   useEffect(() => {
     fetch(`${import.meta.env.VITE_API_URL}/recipes`)
       .then((res) => res.json())

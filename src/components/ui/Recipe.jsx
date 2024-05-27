@@ -84,9 +84,9 @@ const Recipe = ({ recipe }) => {
   return (
     <div>
       <div className="flex px-3 py-3">
-        <div className="max-w-sm rounded overflow-hidden shadow-lg">
+        <div className="max-w-sm rounded overflow-hidden shadow-lg w-80">
           <img
-            className="w-full"
+            className="min-w-full h-52 object-cover"
             src={recipe?.recipeImage}
             alt="Sunset in the mountains"
           />

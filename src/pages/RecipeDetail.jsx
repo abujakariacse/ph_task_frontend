@@ -10,16 +10,30 @@ import { FaEye } from "react-icons/fa";
 import { IoBag } from "react-icons/io5";
 import { useEffect, useState } from "react";
 import { dateConverter } from "../utils/dateConverter";
+import Recipe from "../components/ui/Recipe";
 
 const RecipeDetail = () => {
   let { id } = useParams();
   const [recipeDetail, setRecideDetail] = useState({});
+  const [suggestions, setSuggestions] = useState([]);
 
   useEffect(() => {
     fetch(`${import.meta.env.VITE_API_URL}/recipes/get-one?id=${id}`)
       .then((res) => res.json())
       .then((data) => setRecideDetail(data?.data));
   }, [id, recipeDetail]);
+
+  useEffect(() => {
+    const apiURL = `${
+      import.meta.env.VITE_API_URL
+    }/recipes/suggestion?country=${recipeDetail?.country}&category=${
+      recipeDetail?.category
+    }`;
+
+    fetch(apiURL)
+      .then((res) => res.json())
+      .then((data) => setSuggestions(data?.data));
+  }, [recipeDetail?.category, recipeDetail?.country]);
 
   return (
     <div className="testimonial-section">
@@ -107,7 +121,16 @@ const RecipeDetail = () => {
           </div>
         </div>
       </div>
-      <div>{/* Sugesstions depend on category and country */}</div>
+      <div>
+        <h3 className="text-center py-10 text-2xl font-medium text-gray-700">
+          Recommended for You
+        </h3>
+        <div className="flex justify-center items-center">
+          {suggestions?.map((suggestion) => (
+            <Recipe key={suggestion?._id} recipe={suggestion}></Recipe>
+          ))}
+        </div>
+      </div>
     </div>
   );
 };
