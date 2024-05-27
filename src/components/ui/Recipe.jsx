@@ -56,7 +56,6 @@ const Recipe = ({ recipe }) => {
     const headers = {
       "Content-Type": "application/json",
     };
-    console.log(data);
     if (isConfirmed) {
       fetch(`${import.meta.env.VITE_API_URL}/recipes/view-recipe`, {
         method: "POST",

@@ -5,17 +5,17 @@ import Recipe from "../components/ui/Recipe";
 
 const Recipes = () => {
   const [recipes, setRecipes] = useState([]);
-
   const [selectedCategories, setSelectedCategories] = useState([]);
+
   const [searchInput, setSearchInput] = useState("");
 
-  const handleCheckboxChange = (event) => {
-    const { name, checked } = event.target;
+  const handleCheckboxChange = (event, value) => {
+    const { checked } = event.target;
     if (checked) {
-      setSelectedCategories((prev) => [...prev, name]);
+      setSelectedCategories((prev) => [...prev, value]);
     } else {
       setSelectedCategories((prev) =>
-        prev.filter((categoryId) => categoryId !== name)
+        prev.filter((categoryId) => categoryId !== value)
       );
     }
   };
@@ -28,25 +28,41 @@ const Recipes = () => {
     fetch(`${import.meta.env.VITE_API_URL}/recipes`)
       .then((res) => res.json())
       .then((data) => setRecipes(data?.data));
-  }, [recipes]);
+  }, []);
 
   useEffect(() => {
     const queryParams = new URLSearchParams();
-    selectedCategories.forEach((category) => {
-      queryParams.append("category", category);
-    });
 
-    // queryParams.append("search", searchInput);
+    selectedCategories?.forEach((category) => {
+      queryParams?.append("category", category);
+    });
 
     const currentUrl = new URL(window.location.href);
     currentUrl.search = queryParams.toString();
     window.history.replaceState({}, "", currentUrl.toString());
-  }, [selectedCategories, searchInput]);
+
+    const apiUrl = `${
+      import.meta.env.VITE_API_URL
+    }/recipes/filter?${queryParams.toString()}`;
+
+    if (selectedCategories.length) {
+      fetch(apiUrl)
+        .then((res) => {
+          if (!res.ok) {
+            throw new Error("Network response was not ok");
+          }
+          return res.json();
+        })
+        .then((data) => setRecipes(data?.data))
+        .catch((error) => console.error("Error fetching data:", error));
+    }
+  }, [selectedCategories]);
+
   return (
     <div>
-      <div className=" p-10 testimonial-section ">
+      <div className=" p-4 testimonial-section ">
         <Breadcrumb routeName={"Recipes"}></Breadcrumb>
-        <div className="flex pt-8 relative">
+        <div className="flex pt-4 relative">
           <div className="w-96 bg-white h-screen col-span-4 rounded-sm p-4 sticky top-0">
             <h3 className="text-lg font-medium pb-4">Filters</h3>
             {categories?.map((category) => (
@@ -54,10 +70,10 @@ const Recipes = () => {
                 <input
                   type="checkbox"
                   id={category?.id}
-                  value={category?.name}
+                  value={category?.value}
                   name={category?.name}
                   className="cursor-pointer"
-                  onChange={handleCheckboxChange}
+                  onChange={() => handleCheckboxChange(event, category?.value)}
                 />
                 <label
                   htmlFor={category?.id}

@@ -103,10 +103,10 @@ const AddRecipes = () => {
   };
 
   return (
-    <div className="m-10">
+    <div className="p-4 testimonial-section">
       <Breadcrumb routeName={"Add Recipe"} />
-      <div className="bg-white border rounded-lg shadow relative m-10">
-        <div className="flex items-start justify-between p-5 border-b rounded-t">
+      <div className="bg-white border rounded-lg shadow relative m-2">
+        <div className="flex items-start justify-between p-4 border-b rounded-t">
           <h3 className="text-xl font-semibold">Add Recipe</h3>
         </div>
 
@@ -180,7 +180,7 @@ const AddRecipes = () => {
                   required
                   id="category"
                   name="category"
-                  value={formData.category}
+                  value={formData.value}
                   onChange={handleChange}
                   className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg outline-none focus:outline-none block w-full p-3"
                 >
@@ -203,7 +203,7 @@ const AddRecipes = () => {
               <div className="col-span-full">
                 <label
                   htmlFor="product-details"
-                  className="text-sm font-medium text-gray-900 block mb-2"
+                  className="text-sm font-medium text-gray-900 block mb-1.5"
                 >
                   Recipe details
                 </label>
