@@ -1,15 +1,19 @@
 import { useState } from "react";
 import Breadcrumb from "../components/ui/Breadcrumb";
 import { toast } from "react-toastify";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "../firebase";
 
 const AddRecipes = () => {
+  const [user] = useAuthState(auth);
   const [formData, setFormData] = useState({
     recipeName: "",
     country: "",
     videoCode: "",
     category: "",
-    recipeDetails: "",
-    image: null,
+    recipeDetail: "",
+    recipeImage: null,
+    creatorEmail: "",
   });
 
   const [uploading, setUploading] = useState(false);
@@ -26,14 +30,14 @@ const AddRecipes = () => {
     const file = e.target.files[0];
     setFormData((prevData) => ({
       ...prevData,
-      image: file,
+      recipeImage: file,
     }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!formData.image) {
+    if (!formData.recipeImage) {
       toast.warn("Please select an image.");
       return;
     }
@@ -41,7 +45,7 @@ const AddRecipes = () => {
     setUploading(true);
 
     const formDataImage = new FormData();
-    formDataImage.append("image", formData.image);
+    formDataImage.append("image", formData.recipeImage);
 
     try {
       const response = await fetch(
@@ -61,10 +65,28 @@ const AddRecipes = () => {
       const data = await response.json();
       const completeFormData = {
         ...formData,
-        image: data.data.url,
+        recipeImage: data.data.url,
       };
 
-      console.log("Form submitted", completeFormData);
+      const uploadAbleData = { ...completeFormData, creatorEmail: user?.email };
+      console.log(uploadAbleData);
+      if (response.status === 200) {
+        const headers = {
+          "Content-Type": "application/json",
+        };
+        const res = await fetch(
+          `${import.meta.env.VITE_API_URL}/recipes/create-recipe`,
+          {
+            method: "POST",
+            headers: headers,
+            body: JSON.stringify(uploadAbleData),
+          }
+        );
+        const result = await res.json();
+        if (result.success) {
+          toast.success("Added successfully");
+        }
+      }
     } catch (error) {
       toast.error("Failed to upload image");
     } finally {
@@ -74,8 +96,8 @@ const AddRecipes = () => {
         country: "",
         videoCode: "",
         category: "",
-        recipeDetails: "",
-        image: null,
+        recipeDetail: "",
+        recipeImage: null,
       });
     }
   };
@@ -187,8 +209,8 @@ const AddRecipes = () => {
                 </label>
                 <textarea
                   id="product-details"
-                  name="recipeDetails"
-                  value={formData.recipeDetails}
+                  name="recipeDetail"
+                  value={formData.recipeDetail}
                   onChange={handleChange}
                   rows="6"
                   required

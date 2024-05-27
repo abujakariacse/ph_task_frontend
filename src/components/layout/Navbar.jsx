@@ -40,6 +40,7 @@ const Navbar = () => {
     setIsMenuVisible(false);
     signOutUser();
     toast.success("Sign out Successful");
+    navigate("/");
   };
 
   useEffect(() => {
@@ -48,6 +49,33 @@ const Navbar = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+
+  // useEffect(() => {
+  //   async function createUser() {
+  //     const headers = {
+  //       "Content-Type": "application/json",
+  //     };
+
+  //     const body = {
+  //       displayName: user?.displayName,
+  //       photoURL: user?.photoURL,
+  //       email: user?.email,
+  //     };
+
+  //     const response = await fetch(
+  //       `${import.meta.env.VITE_API_URL}/users/create-user`,
+  //       {
+  //         method: "POST",
+  //         headers: headers,
+  //         body: JSON.stringify(body),
+  //       }
+  //     );
+  //     const data = await response.json();
+  //     console.log(data);
+  //   }
+
+  //   createUser();
+  // }, [user]);
 
   return (
     <div>

@@ -8,35 +8,44 @@ import { FaPenAlt } from "react-icons/fa";
 import { FaGlobe } from "react-icons/fa";
 import { FaEye } from "react-icons/fa";
 import { IoBag } from "react-icons/io5";
+import { useEffect, useState } from "react";
+import { dateConverter } from "../utils/dateConverter";
 
 const RecipeDetail = () => {
   let { id } = useParams();
+  const [recipeDetail, setRecideDetail] = useState({});
+
+  useEffect(() => {
+    fetch(`${import.meta.env.VITE_API_URL}/recipes/get-one?id=${id}`)
+      .then((res) => res.json())
+      .then((data) => setRecideDetail(data?.data));
+  }, [id, recipeDetail]);
 
   return (
     <div className="testimonial-section">
       <div className="container ">
         <div className="py-5 text-center flex flex-col justify-center items-center">
           <h3 className="text-3xl font-medium text-gray-700">
-            Pizza with salami, olives and goat cheese
+            {recipeDetail?.recipeName}
           </h3>
           <p className="text-sm font-medium text-center flex items-center gap-1">
             <span className="flex items-center gap-1">
               {" "}
-              <CiCalendarDate /> October 18, 2020
+              <CiCalendarDate /> {dateConverter(recipeDetail?.createdAt)}
             </span>
             <span className="flex gap-1 items-center">
               {" "}
-              &#44; <FaPenAlt /> Ramson Gorday
+              &#44; <FaPenAlt /> {recipeDetail?.creatorEmail}
             </span>
           </p>
           <p className="text-sm font-medium flex items-center gap-1">
             <span className="flex items-center gap-1">
               <FaGlobe />
-              Bangladesh
+              {recipeDetail?.country}
             </span>{" "}
             &#44;{" "}
             <span className="flex items-center gap-1">
-              <FaEye /> 300
+              <FaEye /> {recipeDetail?.watchCount}
             </span>
           </p>
         </div>
@@ -48,41 +57,34 @@ const RecipeDetail = () => {
           />
         </div>
         <p className="w-7/12 mx-auto my-4 text-md text-justify text-gray-700">
-          Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit
-          amet, ante. Sit amet est et sapien ullamcorper pharetra. Aenean
-          ultricies mi vitae est. Mauris placerat eleifend leo. Vestibulum erat
-          wisi, condimentum sed, commodo vitae. Donec eu libero sit amet. Aenean
-          fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci,
-          sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar
-          facilisis.
+          {recipeDetail?.recipeDetail}
         </p>
         <div className="flex mx-auto justify-center py-5">
           <iframe
             width="640"
             height="360"
-            src="https://www.youtube.com/embed/mgorDuLFk3I"
+            src={`https://www.youtube.com/embed/${recipeDetail?.videoCode}`}
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             referrerPolicy="strict-origin-when-cross-origin"
             allowFullScreen
           ></iframe>
         </div>
-        <div className="text-center">
+        <div className="text-center mb-5">
           <h3 className="text-sm text-gray-700 font-medium flex items-center gap-2 justify-center">
             <IoBag />
             Purchased By:
           </h3>
           <p className="text-sm text-gray-700">
-            <span>Abu Jakaria</span>&#44; <span>Juel Ahmed</span>{" "}
-            <span>Maidul Islam </span>
+            {recipeDetail?.purchasedBy?.map((person, index) => (
+              <span key={index}>Abu Jakaria &#44;</span>
+            ))}
           </p>
         </div>
         <div className="flex justify-center items-center gap-5">
           <div className="text-center py-3 text-gray-700">
             <h3 className="text-sm font-medium">Categories</h3>
-            <span className="text-sm">
-              main dish italian hard olives salami
-            </span>
+            <span className="text-sm">{recipeDetail?.category}</span>
           </div>
           <div className="text-gray-700">
             <h3 className="text-sm font-medium ">Share & Print</h3>

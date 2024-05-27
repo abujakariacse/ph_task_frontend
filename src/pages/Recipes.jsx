@@ -24,14 +24,24 @@ const Recipes = () => {
     setSearchInput(event.target.value);
   };
 
-  // console.log(selectedCategories);
-  console.log(searchInput);
+  useEffect(() => {
+    fetch(`${import.meta.env.VITE_API_URL}/recipes`)
+      .then((res) => res.json())
+      .then((data) => setRecipes(data?.data));
+  }, [recipes]);
 
   useEffect(() => {
-    fetch("recipes.json")
-      .then((res) => res.json())
-      .then((data) => setRecipes(data));
-  }, []);
+    const queryParams = new URLSearchParams();
+    selectedCategories.forEach((category) => {
+      queryParams.append("category", category);
+    });
+
+    // queryParams.append("search", searchInput);
+
+    const currentUrl = new URL(window.location.href);
+    currentUrl.search = queryParams.toString();
+    window.history.replaceState({}, "", currentUrl.toString());
+  }, [selectedCategories, searchInput]);
   return (
     <div>
       <div className=" p-10 testimonial-section ">

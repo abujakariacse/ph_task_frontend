@@ -5,8 +5,9 @@ import Home from "../pages/Home";
 import Recipes from "../pages/Recipes";
 import NotFound from "../pages/NotFound";
 import PurchaseCoin from "../pages/PurchaseCoin";
-import Payment from "../pages/Payment";
 import RecipeDetail from "../pages/RecipeDetail";
+import PaymentSuccess from "../pages/PaymentSuccess";
+import PaymentFailed from "../pages/PaymentFailed";
 
 export const router = createBrowserRouter([
   {
@@ -34,8 +35,12 @@ export const router = createBrowserRouter([
         element: <PurchaseCoin />,
       },
       {
-        path: "/payment",
-        element: <Payment />,
+        path: "/payment-success",
+        element: <PaymentSuccess />,
+      },
+      {
+        path: "/payment-failed",
+        element: <PaymentFailed />,
       },
       {
         path: "*",

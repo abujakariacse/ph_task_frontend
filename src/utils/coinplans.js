@@ -2,19 +2,22 @@ export const plans = [
   {
     id: "plan1",
     name: "essential",
-    coins: 100,
+    quantity: 100,
+    unitPrice: 0.01,
     price: 1,
   },
   {
     id: "plan2",
     name: "pro",
-    coins: 500,
+    quantity: 500,
+    unitPrice: 0.01,
     price: 5,
   },
   {
     id: "plan3",
     name: "premium",
-    coins: 1000,
+    quantity: 1000,
+    unitPrice: 0.01,
     price: 10,
   },
 ];

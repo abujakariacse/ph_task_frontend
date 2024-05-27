@@ -1,26 +1,44 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { plans } from "../utils/coinplans";
 import { GiTwoCoins } from "react-icons/gi";
 import { toast } from "react-toastify";
 import Breadcrumb from "../components/ui/Breadcrumb";
+import { useAuthState } from "react-firebase-hooks/auth";
 import axios from "axios";
+import { auth } from "../firebase";
+import { useNavigate } from "react-router-dom";
 
 const PurchaseCoin = () => {
-  const [selectedPlan, setSelectedPlan] = useState("");
+  const [coin, setCoin] = useState(0);
+  const [selectedPlan, setSelectedPlan] = useState({
+    name: "",
+    price: 0,
+    quantity: 0,
+    customerEmail: "",
+  });
+
+  const navigate = useNavigate();
+
+  const [user] = useAuthState(auth);
+
+  const handlePlanSelect = (plan) => {
+    console.log(plan);
+    setSelectedPlan({
+      name: plan?.name,
+      price: plan?.unitPrice,
+      quantity: plan?.quantity,
+      customerEmail: user?.email,
+    });
+  };
 
   const handlePurchasePlan = async () => {
     if (!selectedPlan) {
       return toast.warn("Select any plan first");
     }
 
-    const product = {
-      name: "Recipe Viewer Coin",
-      price: 10,
-      quantity: 1,
-    };
     let response = await axios.post(
-      "http://localhost:5000/api/v1/payment/create-checkout-session",
-      product
+      `${import.meta.env.VITE_API_URL}/payment/create-checkout-session`,
+      selectedPlan
     );
 
     if (response && response.status === 200) {
@@ -31,6 +49,20 @@ const PurchaseCoin = () => {
       console.log(response.data);
     }
   };
+
+  useEffect(() => {
+    console.log(user?.email);
+    fetch(`${import.meta.env.VITE_API_URL}/users/get-coin`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email: user?.email }),
+    })
+      .then((res) => res.json())
+      .then((data) => setCoin(data?.data?.coin));
+  }, [coin, user?.email]);
+
   return (
     <div className=" testimonial-section p-10">
       <Breadcrumb routeName={"Purchase"} />
@@ -43,7 +75,7 @@ const PurchaseCoin = () => {
             {" "}
             <GiTwoCoins className="text-5xl text-orange-300" />
           </span>
-          1000
+          {coin}
         </span>
       </div>
 
@@ -54,7 +86,7 @@ const PurchaseCoin = () => {
               <label
                 className="cursor-pointer"
                 key={plan?.id}
-                onClick={() => setSelectedPlan(plan?.id)}
+                onClick={() => handlePlanSelect(plan)}
               >
                 <input type="radio" className="peer sr-only" name="pricing" />
                 <div className="w-72 max-w-xl rounded-md bg-white dark:bg-gray-900 p-5 text-gray-600 dark:text-gray-300 ring-2 ring-transparent transition-all hover:shadow peer-checked:text-green-600 peer-checked:ring-green-500 peer-checked:ring-offset-2">
