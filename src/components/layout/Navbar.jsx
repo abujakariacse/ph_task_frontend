@@ -75,7 +75,7 @@ const Navbar = () => {
     }
 
     createUser();
-  }, [user?.email, user?.displayName, user?.photoURL]);
+  }, [user]);
 
   return (
     <div>

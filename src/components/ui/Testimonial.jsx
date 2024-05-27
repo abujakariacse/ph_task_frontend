@@ -3,8 +3,26 @@ import { MdFoodBank } from "react-icons/md";
 import { IoMdPhotos } from "react-icons/io";
 import { LiaPhotoVideoSolid } from "react-icons/lia";
 import CountUp from "react-countup";
+import { useEffect, useState } from "react";
 
 const Testimonial = () => {
+  const [dataCount, setDataCount] = useState({
+    userCount: 0,
+    recipeCount: 0,
+  });
+
+  useEffect(() => {
+    const apiUrl = `${import.meta.env.VITE_API_URL}/users/user-recipe`;
+
+    fetch(apiUrl)
+      .then((res) => res.json())
+      .then((data) =>
+        setDataCount({
+          userCount: data?.data?.userCount,
+          recipeCount: data?.data?.recipeCount,
+        })
+      );
+  }, []);
   return (
     <div className="testimonial-section">
       <div className="container py-12 ">
@@ -18,9 +36,9 @@ const Testimonial = () => {
             <FaSearch className="text-7xl text-red-400" />
             <span className="pt-3 text-center">
               <h4 className="text-2xl font-bold text-red-500">
-                <CountUp end={952628} />
+                <CountUp end={dataCount?.userCount} />
               </h4>
-              <p className="text-gray-500 font-semibold">Members</p>
+              <p className="text-gray-500 font-semibold">Users</p>
             </span>
           </div>
           <div className="bg-white p-4 flex flex-col justify-center items-center  w-52 rounded-sm">
@@ -28,7 +46,7 @@ const Testimonial = () => {
             <span className="pt-3 text-center">
               {" "}
               <h4 className="text-2xl font-bold text-red-500">
-                <CountUp end={3431} />
+                <CountUp end={dataCount?.recipeCount} />
               </h4>
               <p className="text-gray-500 font-semibold">Recipes</p>
             </span>
@@ -38,7 +56,7 @@ const Testimonial = () => {
             <span className="pt-3 text-center">
               {" "}
               <h4 className="text-2xl font-bold text-red-500">
-                <CountUp end={11354} />
+                <CountUp end={100} />
               </h4>
               <p className="text-gray-500 font-semibold">Photos</p>
             </span>
@@ -49,7 +67,7 @@ const Testimonial = () => {
             <span className="pt-3 text-center">
               {" "}
               <h4 className="text-2xl font-bold text-red-500">
-                <CountUp end={5443} />
+                <CountUp end={30} />
               </h4>
               <p className="text-gray-500 font-semibold">Videos</p>
             </span>
